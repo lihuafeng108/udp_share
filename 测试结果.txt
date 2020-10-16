@@ -1,0 +1,15 @@
+【192.168.6.202主机】
+root@shine-genvict:~# ./udp_share 2222
+You can recv and send messages.
+Send format:ip port msg
+192.168.6.211 1111 hello!
+Send format:ip port msg
+==>[192.168.6.211:1111]msg:hi!
+
+【192.168.6.211主机】
+root@shine-genvict:~# ./udp_share 1111
+You can recv and send messages.
+Send format:ip port msg
+==>[192.168.6.202:2222]msg:hello!
+192.168.6.202 2222 hi!
+Send format:ip port msg

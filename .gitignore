@@ -1,0 +1,10 @@
+*.so
+/.vscode/
+*.so
+*.I*
+*.P*
+*.Search*
+*.WK3*
+~$C*
+/*.si4project/
+udp_share
