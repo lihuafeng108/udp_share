@@ -1,15 +1,22 @@
 【192.168.6.202主机】
-root@shine-genvict:~# ./udp_share 2222
+root@shine-genvict:~# ./udp_share 
 You can recv and send messages.
-Send format:ip port msg
-192.168.6.211 1111 hello!
-Send format:ip port msg
-==>[192.168.6.211:1111]msg:hi!
+Send msg bellow:
+==>[192.168.6.211:1188]msg:hello
+==>[192.168.6.211:1188]msg:onenightinbeijing
+thanks!!!
+Send msg bellow:
+==>[192.168.6.202:1188]msg:thanks!!!
+
 
 【192.168.6.211主机】
-root@shine-genvict:~# ./udp_share 1111
+root@shine-genvict:~# ./udp_share 
 You can recv and send messages.
-Send format:ip port msg
-==>[192.168.6.202:2222]msg:hello!
-192.168.6.202 2222 hi!
-Send format:ip port msg
+Send msg bellow:
+hello
+Send msg bellow:
+==>[192.168.6.211:1188]msg:hello
+onenightinbeijing
+Send msg bellow:
+==>[192.168.6.211:1188]msg:onenightinbeijing
+==>[192.168.6.202:1188]msg:thanks!!!
