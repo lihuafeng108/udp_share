@@ -1,4 +1,4 @@
-//UDP单播，能发能收
+//UDP组播
 
 #include <stdio.h>
 #include <sys/socket.h>
@@ -10,13 +10,13 @@ void *recv_handle(void *arg);
 
 int main(int argc, int *argv[])
 {
-    if(argc != 2)
+    if(argc != 3)
     {
-        printf("Please input the port!\n");
+        printf("Please input the ip and port!\n");
         return -1;
     }
 
-    int port = atoi(argv[1]);
+    int port = atoi(argv[2]);
     if((port<1025) || (port>65535))
     {
         printf("The port is illegal! Please let it in[1025, 65535]\n");
@@ -30,12 +30,27 @@ int main(int argc, int *argv[])
         return -1;
     }
 
+    //加入组播，组播地址范围:224.0.0.0~239.255.255.255
+    struct ip_mreq zu={0};
+    zu.imr_multiaddr.s_addr = inet_addr(argv[1]);  //设置组播地址
+	zu.imr_interface.s_addr = inet_addr("0.0.0.0");
+	int ret = setsockopt(udp_socket_fd, IPPROTO_IP, IP_ADD_MEMBERSHIP, &zu, sizeof(zu));
+	if(ret < 0)
+	{
+		perror("setsockopt fail\n");
+		return -1;
+	}
+	else
+	{
+		printf("已经加入组：[%s:%d], 等待接收组消息！！！\n", argv[1], port);
+	}
+
     struct sockaddr_in local_addr = {0};
     local_addr.sin_family = AF_INET;         //使用IPV4协议
     local_addr.sin_port = htons(port);
-    local_addr.sin_addr.s_addr = INADDR_ANY; //让系统自动检测本地网卡，自动绑定本地ip
+    local_addr.sin_addr.s_addr = inet_addr("0.0.0.0"); //注意：Linux下，加入组播后，绑定地址只能绑定0.0.0.0地址否则会接收不到数据
 
-    int ret = bind(udp_socket_fd, (struct sockaddr*)&local_addr, sizeof(local_addr));
+    ret = bind(udp_socket_fd, (struct sockaddr*)&local_addr, sizeof(local_addr));
     if(ret < 0)
     {
         printf("Bind socket failed!\n");

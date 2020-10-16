@@ -1,15 +1,27 @@
-【192.168.6.202主机】
-root@shine-genvict:~# ./udp_share 2222
+【192.168.6.211 1112端口程序发信息】
+root@shine-genvict:~# ./udp_share 224.1.1.1 1112
+已经加入组：[224.1.1.1:1112], 等待接收组消息！！！
 You can recv and send messages.
 Send format:ip port msg
-192.168.6.211 1111 hello!
+224.1.1.1 1111 to_all_[224.1.1.1:1111]_msg
 Send format:ip port msg
-==>[192.168.6.211:1111]msg:hi!
+192.168.6.202 1111 to_192.168.6.202_msg
+Send format:ip port msg
+192.168.6.211 1111 to_192.168.6.211_msg
+Send format:ip port msg
 
-【192.168.6.211主机】
-root@shine-genvict:~# ./udp_share 1111
+【192.168.6.202 1111】
+root@shine-genvict:~# ./udp_share 224.1.1.1 1111
+已经加入组：[224.1.1.1:1111], 等待接收组消息！！！
 You can recv and send messages.
 Send format:ip port msg
-==>[192.168.6.202:2222]msg:hello!
-192.168.6.202 2222 hi!
+==>[192.168.6.211:1112]msg:to_all_[224.1.1.1:1111]_msg
+==>[192.168.6.211:1112]msg:to_192.168.6.202_msg
+
+【192.168.6.211 1111】
+root@shine-genvict:~# ./udp_share 224.1.1.1 1111
+已经加入组：[224.1.1.1:1111], 等待接收组消息！！！
+You can recv and send messages.
 Send format:ip port msg
+==>[192.168.6.211:1112]msg:to_all_[224.1.1.1:1111]_msg
+==>[192.168.6.211:1112]msg:to_192.168.6.211_msg
