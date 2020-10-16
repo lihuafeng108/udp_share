@@ -100,6 +100,7 @@ void *recv_handle(void *arg)
 
     while(always_true)
     {
+        memset(msg, 0, sizeof(msg));
         int ret = recvfrom(*socket_fd, msg, sizeof(msg), 0, (struct sockaddr*)&src_addr, &len);
         if(-1 == ret)
         {
