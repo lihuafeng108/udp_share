@@ -38,7 +38,7 @@
 
 void *recv_handle(void *arg);
 
-int main(int argc, int *argv[])
+int main(int argc, char *argv[])
 {
     if(argc != 3)
     {
